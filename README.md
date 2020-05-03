@@ -48,11 +48,11 @@ the video output is session70.avi
 
 # TODOS
 
-- [ ]Deleting out file in each step in "adding all chat voice to .avi file"
+- [ ] Deleting out file in each step in "adding all chat voice to .avi file"
 
-- [ ]use below idea to merge all voice in one go#https://stackoverflow.com/questions/48169031/how-to-add-audio-to-existing-video-using-ffmpeg-at-specific-time
+- [ ] use below idea to merge all voice in one go(https://stackoverflow.com/questions/48169031/how-to-add-audio-to-existing-video-using-ffmpeg-at-specific-time)
 
-- [ ]normilizing the output volume#https://superuser.com/questions/323119/how-can-i-normalize-audio-using-ffmpeg
+- [ ] normilizing the output volume(https://superuser.com/questions/323119/how-can-i-normalize-audio-using-ffmpeg)
 
 # contribute
 
