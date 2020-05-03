@@ -54,7 +54,7 @@ the video output is session70.avi
 
 - [ ] normilizing the output volume(https://superuser.com/questions/323119/how-can-i-normalize-audio-using-ffmpeg)
 
-# contribute
+# contribute :heart:
 
 help to imporve this code and also report any issue that you face with .
 
