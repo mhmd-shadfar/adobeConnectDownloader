@@ -22,15 +22,15 @@ before any this the 0.01 version and just work fine under below conditions :
 
 clone the prject and in project directory run below command :
 
-`
+```python
 python3 adobeDownloader.py --url='LINK_TO_SESSION' --dirName='COURSE_NAME' --fileName='SESSION'
-`
+```
 
 for example :
 
-`
+```python
 python3 adobeDownloader.py --url='http://*/p5u78g9re5i --dirName='math' --fileName='session7'
-`
+```
 
 note : make sure your link **does not** end with /
 
@@ -40,9 +40,9 @@ the final video is SESSION.avi(session7.avi) and you can detele other files in t
 
 this code merge all chat voice of Participants to file and this process could take times if you dont want this voices just use --options='noVoiceChat' and the end of the command. so the whole command is :
 
-`
+```python
 python3 adobeDownloader.py --url='http://*/p5u78g9re5i --dirName='math' --fileName='session7' --options='noVoiceChat'
-`
+```
 
 the video output is session70.avi
 
