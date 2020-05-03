@@ -1,6 +1,6 @@
 # adobeConnectDownloader
 
-a way to download your class that set up in adobe connect platform
+a way to download your class recorded meeting that set up in adobe connect platform
 
 Requirements:
 
@@ -41,7 +41,7 @@ the final video is SESSION.avi(session7.avi) and you can detele other files in t
 #https://stackoverflow.com/questions/48169031/how-to-add-audio-to-existing-video-using-ffmpeg-at-specific-time
 
 #TODO normilizing the output volume
-# https://superuser.com/questions/323119/how-can-i-normalize-audio-using-ffmpeg
+#https://superuser.com/questions/323119/how-can-i-normalize-audio-using-ffmpeg
 
 # contribute
 
