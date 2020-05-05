@@ -2,6 +2,7 @@ import argparse
 import datetime as dt
 import glob
 import os
+import re
 import time
 import wget
 
