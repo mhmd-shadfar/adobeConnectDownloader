@@ -18,10 +18,11 @@ def main():
     # getting inputs from command line
     parser = argparse.ArgumentParser(description='input URL and directory and also name of the file ')
 
-    parser.add_argument('--url', nargs='*', required=True)
+    parser.add_argument('--url', default='', nargs='*')  # , required=True)
     parser.add_argument('--dirName', default='dirName')
     parser.add_argument('--fileName', default='fileName')
     parser.add_argument('--options', default='noChatVoice')
+    parser.add_argument('--fileExist', default=False,action='store_true')
 
     args = parser.parse_args()
 
@@ -31,16 +32,32 @@ def main():
     voiceChat = args.options
     makeDir(outputDir)
 
-    #download zip file and extract it
-    sessioncode = args.url[0]
-    if (sessioncode[-1] == '/'):
-        sessioncode = sessioncode[:-1]
-        
-    url = sessioncode + f'/output/{outputFile}.zip?download=zip'
-    wgetCommand = f'wget -nc -O {outputFile}.zip {url}'
-    os.system(wgetCommand)
+
+    if(not args.fileExist):
+        if(args.url == ""):
+            print("No Url has specified, Get me one using --url ""url"" ")
+            exit()
+        else:
+    
+            #download zip file and extract it
+            sessioncode = args.url[0]
+            if (sessioncode[-1] == '/'):
+                sessioncode = sessioncode[:-1]
+            
+            url = sessioncode + f'/output/{outputFile}.zip?download=zip'
+            wgetCommand = f'wget -nc -O {outputFile}.zip {url}'
+            os.system(f'rm {outputFile}.zip')
+            ret = os.system(wgetCommand)
+            if (ret != 0):
+                print("Download error, exit code = " + str(ret))
+                print("Removing corrupted file")
+                os.system(f'rm {outputFile}.zip')
+            
     unzipCommand = f'unzip -n {outputFile}.zip -d {outputDir}'
-    os.system(unzipCommand)
+    ret = os.system(unzipCommand)
+    if (ret != 0):
+        print("Extraction problem, exit code = " + str(ret))
+        exit()
 
     #get ready to add *.flv together
     cameraVoipFilePaths = {"path":[],"time":[]}
@@ -78,11 +95,14 @@ def main():
     i = 0
     for cameraVoipFilePath, screenshareFilepath in zip(cameraVoipFilePaths["path"], screenshareFilepaths):
         mergeCommand = f'ffmpeg -i {cameraVoipFilePath} -i {screenshareFilepath} -c copy -map 0:a:0 -map 1:v:0 -shortest -y {outputFile}{i}.flv'
+        
         os.system(mergeCommand)
         aviConversionCommand = f'ffmpeg -i {outputFile}{i}.flv -f avi -vcodec mpeg4 -acodec libmp3lame {outputFile}{i}.avi'
+        
         os.system(aviConversionCommand)
         i += 1
-
+    
+    print("#adding all chat voice to .avi file ")
     #adding all chat voice to .avi file 
     if voiceChat == 'noChatVoice' :
 
