@@ -32,7 +32,11 @@ def main():
     makeDir(outputDir)
 
     #download zip file and extract it
-    url = f'{args.url[0]}/output/{outputFile}.zip?download=zip'
+    sessioncode = args.url[0]
+    if (sessioncode[-1] == '/'):
+        sessioncode = sessioncode[:-1]
+        
+    url = sessioncode + f'/output/{outputFile}.zip?download=zip'
     wgetCommand = f'wget -nc -O {outputFile}.zip {url}'
     os.system(wgetCommand)
     unzipCommand = f'unzip -n {outputFile}.zip -d {outputDir}'

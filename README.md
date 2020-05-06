@@ -32,8 +32,6 @@ for example :
 python3 adobeDownloader.py --url='http://*/p5u78g9re5i --dirName='math' --fileName='session7'
 ```
 
-note : make sure your link **does not** end with /
-
 the final video is SESSION.avi(session7.avi) and you can detele other files in the folder .
 
 # advance 
