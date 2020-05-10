@@ -39,7 +39,7 @@ the final video is SESSION.avi(session7.avi) and you can detele other files in t
 this code merge all chat voice of Participants to file and this process could take times if you dont want this voices just use --options='noVoiceChat' and the end of the command. so the whole command is :
 
 ```python
-python3 adobeDownloader.py --url='http://*/p5u78g9re5i --dirName='math' --fileName='session7' --options='noVoiceChat'
+python3 adobeDownloader.py --url='http://*/p5u78g9re5i --dirName='math' --fileName='session7' --options='noChatVoice'
 ```
 
 the video output is session70.avi
