@@ -6,11 +6,15 @@ Requirements:
 
 * python 3
 
-and below requirement should be install by : sudo apt install PACKAGENAME
+and below python package should be install by : sudo pip3 install PYTHONPACKAGE
+
+* requests
+
+and below requirement should be install by (for linux): sudo apt install PACKAGENAME 
 
 * ffmpeg
-* wget
-* unzip
+
+-for other operating system the ffmpeg installition can be found by quick search
 
 before any this the 0.01 version and just work fine under below conditions :
 
