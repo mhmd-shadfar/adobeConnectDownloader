@@ -6,13 +6,33 @@ import glob
 import os
 import re
 import time
-import wget
+import platform
+import requests
+import zipfile
 
-
-# fuction to make directory
+# function to make directory
 def makeDir(dirName):
     if not os.path.exists(dirName):
         os.makedirs(dirName)
+
+# function to download zip file         
+def downloadZipFile(url, dirPath, chunk_size=128):
+    r = requests.get(url, stream=True)
+    with open(dirPath, 'wb') as fd:
+        for chunk in r.iter_content(chunk_size=chunk_size):
+            fd.write(chunk)
+
+# get operating system
+platform = platform.system().lower()
+print('your platform is : ', platform)
+
+#check for operating system
+if platform == 'linux' or platform == 'linux2':
+    platform = 'linux'
+elif platform == 'darwin':
+    platform = 'darwin'
+elif platform == 'win32':
+    platform = 'windows'   
 
 def main():
     # getting inputs from command line
@@ -21,7 +41,7 @@ def main():
     parser.add_argument('--url', default='', nargs='*')  # , required=True)
     parser.add_argument('--dirName', default='dirName')
     parser.add_argument('--fileName', default='fileName')
-    parser.add_argument('--options', default='noChatVoice')
+    parser.add_argument('--options', default='ChatVoice')
     parser.add_argument('--fileExist', default=False,action='store_true')
 
     args = parser.parse_args()
@@ -32,32 +52,35 @@ def main():
     voiceChat = args.options
     makeDir(outputDir)
 
+    #get current Dir path
+    dirPath = os.getcwd()
+    if platform == 'linux' or platform == 'darwin' :
+        dirPath = dirPath+f'/{outputFile}.zip'
+    elif platform == 'windows':
+        dirPath = dirPath+f'\{outputFile}.zip'
 
+    #download zip file  
     if(not args.fileExist):
         if(args.url == ""):
-            print("No Url has specified, Get me one using --url ""url"" ")
+            print("No Url has specified, Give me one using --url ""url"" ")
             exit()
         else:
-    
-            #download zip file and extract it
             sessioncode = args.url[0]
             if (sessioncode[-1] == '/'):
                 sessioncode = sessioncode[:-1]
             
             url = sessioncode + f'/output/{outputFile}.zip?download=zip'
-            wgetCommand = f'wget -nc -O {outputFile}.zip {url}'
-            os.system(f'rm {outputFile}.zip')
-            ret = os.system(wgetCommand)
-            if (ret != 0):
-                print("Download error, exit code = " + str(ret))
-                print("Removing corrupted file")
-                os.system(f'rm {outputFile}.zip')
             
-    unzipCommand = f'unzip -n {outputFile}.zip -d {outputDir}'
-    ret = os.system(unzipCommand)
-    if (ret != 0):
-        print("Extraction problem, exit code = " + str(ret))
-        exit()
+            if os.path.exists(f'{outputFile}.zip'):
+                os.remove(f'{outputFile}.zip')
+            else:
+                print("The file does not exist and will be downloaded")
+
+            downloadZipFile(url, dirPath, chunk_size=128)
+
+    # unzip zip file       
+    with zipfile.ZipFile(f'{outputFile}.zip', 'r') as zipRef:
+        zipRef.extractall(f'{outputDir}')
 
     #get ready to add *.flv together
     cameraVoipFilePaths = {"path":[],"time":[]}
@@ -102,10 +125,9 @@ def main():
         os.system(aviConversionCommand)
         i += 1
     
-    print("#adding all chat voice to .avi file ")
     #adding all chat voice to .avi file 
-    if voiceChat == 'noChatVoice' :
-
+    if voiceChat == 'ChatVoice' :
+        print("adding all chat voice to .avi file ")
         last_succes_i = 0
         for i in range(len(cameraVoipFilePaths["path"])-1):
 
