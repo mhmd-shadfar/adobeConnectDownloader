@@ -6,7 +6,7 @@ Requirements:
 
 * python 3
 
-and below python package should be install by : sudo pip3 install PYTHONPACKAGE
+and below python library should be install by : sudo pip3 install PYTHONPACKAGE
 
 * requests
 
