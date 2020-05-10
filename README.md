@@ -14,7 +14,7 @@ and below requirement should be install by (for linux): sudo apt install PACKAGE
 
 * ffmpeg
 
--for other operating system the ffmpeg installition can be found by quick search
+note : for other operating system the ffmpeg installition can be found by quick search.
 
 before any this the 0.01 version and just work fine under below conditions :
 
