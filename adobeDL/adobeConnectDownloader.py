@@ -5,22 +5,33 @@ import datetime as dt
 import glob
 import os
 import re
-import time
 import platform
 import requests
 import zipfile
+import sys
 
-# function to make directory
+# fuction to make directory
 def makeDir(dirName):
     if not os.path.exists(dirName):
         os.makedirs(dirName)
 
 # function to download zip file         
-def downloadZipFile(url, dirPath, chunk_size=128):
-    r = requests.get(url, stream=True)
-    with open(dirPath, 'wb') as fd:
-        for chunk in r.iter_content(chunk_size=chunk_size):
-            fd.write(chunk)
+def downloadZipFile(url, dirPath, chunk_size=4096):
+    response = requests.get(url, stream=True)
+    print("Downloading zip file ... ")
+    with open(dirPath, 'wb') as f:
+        totalLength = response.headers.get('content-length')
+        if totalLength is None: 
+            f.write(response.content)
+        else:
+            dl = 0
+            totalLength = int(totalLength)
+            for data in response.iter_content(chunk_size=chunk_size):
+                dl += len(data)
+                f.write(data)
+                done = int(50 * dl / totalLength)
+                sys.stdout.write("\r progress bar : [%s%s] %d%%" % ('=' * done, ' ' * (50-done),int((dl/totalLength)*100)) )    
+                sys.stdout.flush()
 
 # get operating system
 platform = platform.system().lower()
@@ -76,7 +87,7 @@ def main():
             else:
                 print("The file does not exist and will be downloaded")
 
-            downloadZipFile(url, dirPath, chunk_size=128)
+            downloadZipFile(url, dirPath, chunk_size=4096)
 
     # unzip zip file       
     with zipfile.ZipFile(f'{outputFile}.zip', 'r') as zipRef:
