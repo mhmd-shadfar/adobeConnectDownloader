@@ -20,6 +20,7 @@ before any this the 0.01 version and just work fine under below conditions :
 
   for classes that:
     1- the Host(Professor) share their own screen not slides
+    
     2- no passwords set for the class
     
 # How to run 
