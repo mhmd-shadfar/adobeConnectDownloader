@@ -57,39 +57,47 @@ def main():
 
     args = parser.parse_args()
 
-    # make direcory
+    # saving args
+    url = args.url
     outputDir = args.dirName
     outputFile = args.fileName
     voiceChat = args.options
-    makeDir(outputDir)
 
     #get current Dir path
     dirPath = os.getcwd()
     if platform == 'linux' or platform == 'darwin' :
         dirPath = dirPath+f'/{outputFile}.zip'
+        url = url[0]
     elif platform == 'windows':
+        url = url[0][1:-1]
+        outputDir = outputDir[1:-1]
+        outputFile = outputFile[1:-1]
         dirPath = dirPath+f'\{outputFile}.zip'
-
+        
+    # make direcory
+    makeDir(outputDir)
+       
+    #print(url,outputDir,outputFile,dirPath)
     #download zip file  
     if(not args.fileExist):
-        if(args.url == ""):
+        if(url == ""):
             print("No Url has specified, Give me one using --url ""url"" ")
             exit()
         else:
-            sessioncode = args.url[0]
+            sessioncode = url
             if (sessioncode[-1] == '/'):
-                sessioncode = sessioncode[:-1]
-            
+                sessioncode = sessioncode[0:-1]
+                    
             url = sessioncode + f'/output/{outputFile}.zip?download=zip'
             
             if os.path.exists(f'{outputFile}.zip'):
                 os.remove(f'{outputFile}.zip')
             else:
                 print("The file does not exist and will be downloaded")
-
+            #print(url)
             downloadZipFile(url, dirPath, chunk_size=4096)
 
-    # unzip zip file       
+    # unzip zip file
     with zipfile.ZipFile(f'{outputFile}.zip', 'r') as zipRef:
         zipRef.extractall(f'{outputDir}')
 
