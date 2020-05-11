@@ -33,7 +33,7 @@ python3 adobeConnectDownloader.py --url='LINK_TO_SESSION' --dirName='COURSE_NAME
 for example :
 
 ```python
-python3 adobeConnectDownloader.py --url='http://*/p5u78g9re5i --dirName='math' --fileName='session7'
+python3 adobeConnectDownloader.py --url='http://*/p5u78g9re5i' --dirName='math' --fileName='session7'
 ```
 
 the final video is SESSION.avi(session7.avi) and you can detele other files in the folder .
@@ -43,7 +43,7 @@ the final video is SESSION.avi(session7.avi) and you can detele other files in t
 1.this code merge all chat voice of Participants to file and this process could take times if you dont want this voices just use --options='noVoiceChat' and the end of the command. so the whole command is :
 
 ```python
-python3 adobeConnectDownloader.py --url='http://*/p5u78g9re5i --dirName='math' --fileName='session7' --options='noChatVoice'
+python3 adobeConnectDownloader.py --url='http://*/p5u78g9re5i' --dirName='math' --fileName='session7' --options='noChatVoice'
 ```
 
 the video output is session70.avi
@@ -51,7 +51,7 @@ the video output is session70.avi
 2.if you are sure that zip file downloaded by code is not currepted and you dont want to downlaod it again use --fileExist at the end of command like :
 
 ```python
-python3 adobeConnectDownloader.py --url='http://*/p5u78g9re5i --dirName='math' --fileName='session7' --options='noChatVoice' --fileExist
+python3 adobeConnectDownloader.py --url='http://*/p5u78g9re5i' --dirName='math' --fileName='session7' --options='noChatVoice' --fileExist
 ```
 
 # TODOS
