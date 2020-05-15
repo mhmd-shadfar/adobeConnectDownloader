@@ -2,19 +2,27 @@
 
 a way to download your class recorded meeting that set up in adobe connect platform
 
+# installation
+
 Requirements:
 
 * python 3
+
+Just windows Users Go to https://www.python.org/downloads/ 
 
 and below python library should be install by : sudo pip3 install PYTHONLIBRARY
 
 * requests
 
+Install requirements with pip install -r requirements.txt
+
+
 and below requirement should be install by (for linux): sudo apt install PACKAGENAME 
 
 * ffmpeg
 
-note : for other operating system the ffmpeg installition can be found by quick search.
+Installing ffmpeg:
+Compilation instruction: https://trac.ffmpeg.org/wiki/CompilationGuide
 
 before any this the 0.01 version and just work fine under below conditions :
 
